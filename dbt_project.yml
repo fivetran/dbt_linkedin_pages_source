@@ -1,0 +1,10 @@
+name: 'linkedin_pages_source'
+version: '0.1.0'
+config-version: 2
+require-dbt-version: ">=0.20.0"
+
+vars:
+  share_statistic: "{{ source('linkedin_pages','share_statistic') }}"
+  ugc_post_share_statistic: "{{ source('linkedin_pages','ugc_post_share_statistic') }}"
+  ugc_post_history: "{{ source('linkedin_pages','ugc_post_history') }}"
+  ugc_post_share_content_media: "{{ source('linkedin_pages','ugc_post_share_content_media') }}"
