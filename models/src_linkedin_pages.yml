@@ -11,3 +11,5 @@ sources:
       - name: ugc_post_share_statistic
       - name: ugc_post_history
       - name: ugc_post_share_content_media
+      - name: organization
+      - name: organization_ugc_post
