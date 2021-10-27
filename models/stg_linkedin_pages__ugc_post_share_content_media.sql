@@ -11,7 +11,7 @@ fields as (
     select
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin_pages__ugc_post_share_content_media_tmp')),
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin_pages__ugc_post_share_media_tmp')),
                 staging_columns=get_ugc_post_share_content_media_columns()
             )
         }}
