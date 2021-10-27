@@ -2,7 +2,7 @@
 with base as (
 
     select * 
-    from {{ ref('stg_linkedin_pages__ugc_post_share_content_media_tmp') }}
+    from {{ ref('stg_linkedin_pages__ugc_post_share_media_tmp') }}
 
 ),
 
