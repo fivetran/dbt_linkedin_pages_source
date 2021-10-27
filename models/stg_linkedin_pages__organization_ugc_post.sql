@@ -24,7 +24,7 @@ final as (
     select 
         _fivetran_synced,
         organization_id,
-        ugc_post_id
+        replace(ugc_post_id, 'urn:li:share:', '') as ugc_post_id
     from fields
 )
 
