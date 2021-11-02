@@ -37,6 +37,10 @@ final as (
         title_inferred_locale,
         title_text,
         ugc_post_id
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_pages_union_schemas', 
+            union_database_variable='linkedin_pages_union_databases') 
+        }}
     from fields
 )
 
