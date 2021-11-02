@@ -16,6 +16,11 @@ fields as (
             )
         }}
         
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_pages_union_schemas', 
+            union_database_variable='linkedin_pages_union_databases') 
+        }}
+        
     from base
 ),
 
@@ -26,11 +31,8 @@ final as (
         -- TODO: pull out actual name
         name_localized,
         name_preferred_locale_country,
-        name_preferred_locale_language
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='linkedin_pages_union_schemas', 
-            union_database_variable='linkedin_pages_union_databases') 
-        }}
+        name_preferred_locale_language,
+        source_relation
     from fields
 )
 

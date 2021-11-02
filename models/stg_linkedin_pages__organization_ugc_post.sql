@@ -15,6 +15,11 @@ fields as (
                 staging_columns=get_organization_ugc_post_columns()
             )
         }}
+
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_pages_union_schemas', 
+            union_database_variable='linkedin_pages_union_databases') 
+        }}
         
     from base
 ),
@@ -24,11 +29,8 @@ final as (
     select 
         _fivetran_synced,
         organization_id,
-        replace(ugc_post_id, 'urn:li:share:', '') as ugc_post_id
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='linkedin_pages_union_schemas', 
-            union_database_variable='linkedin_pages_union_databases') 
-        }}
+        replace(ugc_post_id, 'urn:li:share:', '') as ugc_post_id,
+        source_relation
     from fields
 )
 

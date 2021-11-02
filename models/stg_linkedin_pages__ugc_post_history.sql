@@ -15,6 +15,11 @@ fields as (
                 staging_columns=get_ugc_post_history_columns()
             )
         }}
+
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_pages_union_schemas', 
+            union_database_variable='linkedin_pages_union_databases') 
+        }}
         
     from base
 ),
@@ -43,11 +48,8 @@ final as (
         specific_content_share_media_category,
         target_audience_targeted_entities,
         version_tag,
-        visibility
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='linkedin_pages_union_schemas', 
-            union_database_variable='linkedin_pages_union_databases') 
-        }}
+        visibility,
+        source_relation
     from fields
 )
 

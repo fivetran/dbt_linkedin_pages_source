@@ -15,7 +15,12 @@ fields as (
                 staging_columns=get_share_statistic_columns()
             )
         }}
-        
+
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_pages_union_schemas', 
+            union_database_variable='linkedin_pages_union_databases') 
+        }}
+    
     from base
 ),
 
@@ -31,11 +36,8 @@ final as (
         engagement,
         impression_count,
         like_count,
-        share_count
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='linkedin_pages_union_schemas', 
-            union_database_variable='linkedin_pages_union_databases') 
-        }}
+        share_count,
+        source_relation
     from fields
 )
 
