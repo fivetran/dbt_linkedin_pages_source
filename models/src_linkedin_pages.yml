@@ -127,7 +127,7 @@ sources:
           - name: title_attributes
             description: User generated attributes in the text.
           - name: title_inferred_locale
-            description: 	The locale that may have be inferred for this text.
+            description: The locale that may have be inferred for this text.
           - name: title_text
             description: The text content that may be attributed.
           - name: ugc_post_id
