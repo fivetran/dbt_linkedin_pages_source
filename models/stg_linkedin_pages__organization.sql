@@ -28,10 +28,7 @@ final as (
     
     select 
         id as organization_id,
-        -- TODO: pull out actual name
-        name_localized,
-        name_preferred_locale_country,
-        name_preferred_locale_language,
+        localized_name as organization_name,
         source_relation
     from fields
 )
