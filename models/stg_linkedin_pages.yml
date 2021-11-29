@@ -3,11 +3,18 @@ version: 2
 models:
   - name: stg_linkedin_pages__organization_ugc_post
     description: Mapping table for organizations and UGC posts.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - organization_id
+            - ugc_post_id
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
       - name: organization_id
         description: Unique id for the organization
+        tests:
+          - not_null
       - name: ugc_post_id
         description: Unique id for the UGC post
       - name: source_relation
@@ -18,6 +25,9 @@ models:
     columns:
       - name: organization_id
         description: Unique id for the organization
+        tests:
+          - unique
+          - not_null
       - name: name_localized
         description: The localized name of the organization.
       - name: name_preferred_locale_country
@@ -29,6 +39,12 @@ models:
 
   - name: stg_linkedin_pages__share_statistic
     description: Each record represnts the performance of a Linkedin share.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - _fivetran_id
+            - organization_entity_urn
+            - share_entity_urn
     columns:
       - name: _fivetran_id
         description: The Fivetran ID of the record
@@ -55,6 +71,11 @@ models:
 
   - name: stg_linkedin_pages__ugc_post_history
     description: Each record represents a version of a UGC post.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ugc_post_id
+            - last_modified_timestamp
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -101,6 +122,11 @@ models:
 
   - name: stg_linkedin_pages__ugc_post_share_content_media
     description: Each record represents content media shared as part of a UGC post.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ugc_post_id
+            - last_modified_timestamp
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -137,10 +163,15 @@ models:
 
   - name: stg_linkedin_pages__ugc_post_share_statistic 
     description: Mapping table for organizations and UGC posts.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ugc_post_id
+            - share_statistic_id
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
-      - name: organization_id
+      - name: share_statistic_id
         description: Unique id for the organization
       - name: ugc_post_id
         description: Unique id for the UGC post

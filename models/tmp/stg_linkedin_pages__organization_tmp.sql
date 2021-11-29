@@ -1,3 +1,4 @@
+--depends_on: {{ var('organization') }}
 {{
     fivetran_utils.union_data(
         table_identifier='organization', 
