@@ -34,7 +34,7 @@ final as (
         deleted_actor,
         deleted_time as deleted_timestamp,
         first_published_at as first_published_timestamp,
-        replace(id, 'urn:li:share:', '') as ugc_post_id,
+        coalesce(replace(id, 'urn:li:share:', ''), replace(id, 'urn:li:post:', '')) as ugc_post_id,
         id as ugc_post_urn,
         -- This generates an 'embed' URL. I can't get normal URLs working.
         {{ dbt_utils.concat(["'https://www.linkedin.com/embed/feed/update/'", "id"]) }} as post_url,
