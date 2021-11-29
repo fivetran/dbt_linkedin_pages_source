@@ -156,7 +156,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ugc_post_id
-            - share_statistic_id
+            - _fivetran_synced
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
