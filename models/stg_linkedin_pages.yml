@@ -8,8 +8,6 @@ models:
         description: The timestamp of when the record was last synced by Fivetran
       - name: organization_id
         description: Unique id for the organization
-        tests:
-          - not_null
       - name: ugc_post_id
         description: Unique id for the UGC post
       - name: source_relation
@@ -37,8 +35,6 @@ models:
     columns:
       - name: _fivetran_id
         description: The Fivetran ID of the record
-        tests:
-          - not_null
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
       - name: organization_entity_urn
