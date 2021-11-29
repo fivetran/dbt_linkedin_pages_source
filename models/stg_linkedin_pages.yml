@@ -3,11 +3,6 @@ version: 2
 models:
   - name: stg_linkedin_pages__organization_ugc_post
     description: Mapping table for organizations and UGC posts.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - organization_id
-            - ugc_post_id
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -38,20 +33,18 @@ models:
         description: The source of the record, if the unioning functionality is being used.
 
   - name: stg_linkedin_pages__share_statistic
-    description: Each record represnts the performance of a Linkedin share.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - _fivetran_id
-            - organization_entity_urn
-            - share_entity_urn
+    description: Each record represents the performance of a Linkedin share.
     columns:
       - name: _fivetran_id
         description: The Fivetran ID of the record
+        tests:
+          - not_null
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
       - name: organization_entity_urn
         description: The organizational entity URN for which the statistics represents.
+        tests:
+          - not_null
       - name: share_entity_urn
         description: The share URN for describing individual share statistics. Is blank for aggregate share statistics.
       - name: click_count
