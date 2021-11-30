@@ -3,6 +3,12 @@ version: 2
 models:
   - name: stg_linkedin_pages__organization_ugc_post
     description: Mapping table for organizations and UGC posts.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - organization_id
+            - ugc_post_id
+            - source_relation
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -15,12 +21,14 @@ models:
 
   - name: stg_linkedin_pages__organization
     description: Each record represents an organization.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - organization_id
+            - source_relation
     columns:
       - name: organization_id
         description: Unique id for the organization
-        tests:
-          - unique
-          - not_null
       - name: name_localized
         description: The localized name of the organization.
       - name: name_preferred_locale_country
@@ -32,8 +40,13 @@ models:
 
   - name: stg_linkedin_pages__share_statistic
     description: Each record represents the performance of a Linkedin share.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - share_statistic_id
+            - source_relation
     columns:
-      - name: _fivetran_id
+      - name: share_statistic_id
         description: The Fivetran ID of the record
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -65,6 +78,7 @@ models:
           combination_of_columns:
             - ugc_post_id
             - last_modified_timestamp
+            - source_relation
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -116,6 +130,7 @@ models:
           combination_of_columns:
             - ugc_post_id
             - last_modified_timestamp
+            - source_relation
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
@@ -155,8 +170,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ugc_post_id
-            - _fivetran_synced
+            - share_statistic_id
+            - source_relation
     columns:
       - name: _fivetran_synced
         description: The timestamp of when the record was last synced by Fivetran
