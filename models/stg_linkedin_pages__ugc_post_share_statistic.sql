@@ -18,7 +18,8 @@ fields as (
 
         {{ fivetran_utils.source_relation(
             union_schema_variable='linkedin_pages_union_schemas', 
-            union_database_variable='linkedin_pages_union_databases') 
+            union_database_variable='linkedin_pages_union_databases',
+            schema_variable='linkedin_pages_schema') 
         }}
         
     from base
