@@ -16,4 +16,4 @@ models:
     +schema: stg_linkedin_pages
     +materialized: view
     tmp:
-      +materialized: view
+      +materialized: table
