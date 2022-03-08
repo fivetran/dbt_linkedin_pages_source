@@ -1,3 +1,6 @@
+# dbt_linkedin_pages_source v0.1.2
+## 🐞 Bugfix 🐞
+- Modified the `ugc_post_id` parsing logic within `stg_linkedin_pages__organization_ugc_post` to dynamically parse the correct `ugc_post_id`. Previously, only posts of the `share` type where being parsed correctly. This will now work for both `share` and `ugcpost` types ([#7](https://github.com/fivetran/dbt_linkedin_pages_source/issues/6))
 # dbt_linkedin_pages_source v0.1.1
 ## 🐞 Bugfix 🐞
 Previously, Redshift threw the error "constant expressions are not supported in partition by clauses" for the model `int_linkedin_pages__latest_post_history`. 
