@@ -29,7 +29,7 @@ final as (
     select 
         _fivetran_synced,
         organization_id,
-        replace(ugc_post_id, 'urn:li:share:', '') as ugc_post_id,
+        split_part(ugc_post_id, ':', -1) as ugc_post_id,
         source_relation
     from fields
 )
