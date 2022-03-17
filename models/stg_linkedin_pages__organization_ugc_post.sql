@@ -29,7 +29,15 @@ final as (
     select 
         _fivetran_synced,
         organization_id,
-        split_part(ugc_post_id, ':', -1) as ugc_post_id,
+
+        case
+            when lower(ugc_post_id) like '%urn:li:share:%' 
+                then replace(ugc_post_id, 'urn:li:share:', '')
+            when lower(ugc_post_id) like '%urn:li:ugcpost:%'
+                then replace(lower(ugc_post_id), 'urn:li:ugcpost:', '')
+            else ugc_post_id
+        end as ugc_post_id,
+
         source_relation
     from fields
 )
