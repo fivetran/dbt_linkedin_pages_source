@@ -1,8 +1,7 @@
 name: 'linkedin_pages_source'
-version: '0.1.2'
+version: '0.2.0'
 config-version: 2
-require-dbt-version: [">=1.0.0", "<2.0.0"]
-
+require-dbt-version: [">=1.2.0", "<2.0.0"]
 vars:
   share_statistic: "{{ source('linkedin_pages','share_statistic') }}"
   ugc_post_share_statistic: "{{ source('linkedin_pages','ugc_post_share_statistic') }}"
@@ -10,7 +9,6 @@ vars:
   ugc_post_share_content_media: "{{ source('linkedin_pages','ugc_post_share_content_media') }}"
   organization: "{{ source('linkedin_pages','organization') }}"
   organization_ugc_post: "{{ source('linkedin_pages','organization_ugc_post') }}"
-
 models:
   linkedin_pages_source:
     +schema: stg_linkedin_pages
