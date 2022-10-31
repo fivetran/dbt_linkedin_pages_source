@@ -27,7 +27,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/linkedin_pages_source
-    version: [">=0.1.0", "<0.2.0"]
+    version: [">=0.2.0", "<0.3.0"]
 ```
 
 ## Package Maintenance
