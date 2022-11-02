@@ -26,14 +26,6 @@ To use this dbt package, you must have the following:
 - A Fivetran LinkedIn Pages connector syncing data into your destination. 
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
-### Databricks Dispatch Configuration
-If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
-```yml
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['spark_utils', 'dbt_utils']
-```
-
 ## Step 2: Install the package
 Include the following linkedin_pages_source package version in your `packages.yml` file **only if you are NOT also installing the [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages_source)**. The transform package has a dependency on this source package.
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
@@ -54,6 +46,7 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional Configurations
+<details><summary>Expand for configurations</summary>
 
 ### Changing the Build Schema
 
@@ -92,8 +85,22 @@ vars:
     linkedin_pages_union_databases: ['linkedin_pages_one','linkedin_pages_two']
 ```
 
+### Databricks Additional Configuration
+If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
+```yml
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
+```
+</details>
+
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+<details><summary>Expand for details</summary>
+<br>
+
 Fivetran offers the ability for you to orchestrate your dbt project through the [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt) product. Refer to the linked docs for more information on how to setup your project for orchestration through Fivetran. 
+
+</details>
 
 # 🔍 Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
