@@ -50,10 +50,11 @@ By default, this package will look for your LinkedIn Pages data in the `linkedin
 ```yml 
 vars:
     linkedin_pages_schema: your_schema_name
-    linkedin_pages_database: your_database_name 
+    linkedin_pages_database: your_database_name
 ```
 
 ## (Optional) Step 4: Additional Configurations
+
 ### Changing the Build Schema
 
 By default, this package will build the LinkedIn Pages staging models within a schema titled (`<target_schema>` + `_stg_linkedin_pages`) in your target database. If this is not where you would like your LinkedIn Pages staging data to be written to, add the following configuration to your `dbt_project.yml` file:
@@ -65,6 +66,15 @@ By default, this package will build the LinkedIn Pages staging models within a s
 models:
     linkedin_pages_source:
       +schema: my_new_schema_name # leave blank for just the target_schema
+```
+
+### Change the source table references
+If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
+> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_linkedin_pages_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
+    
+```yml
+vars:
+    linkedin_pages_<default_source_table_name>_identifier: your_table_name 
 ```
 
 ### Unioning Multiple LinkedIn Pages Connectors
@@ -80,18 +90,6 @@ vars:
 
     ##OR you may set EITHER the databases variables below
     linkedin_pages_union_databases: ['linkedin_pages_one','linkedin_pages_two']
-```
-
-### Disable models for non-existent sources
-This package takes into consideration that not every LinkedIn Page account utilizes these features, and allows you to disable the corresponding functionality. By default, all variables' values are assumed to be `true`. 
-```yml
-vars:
-    linkedin_pages_organization_enabled: false  #Disable if you do not have the organization table
-    linkedin_pages_organization_ugc_post_enabled: false #Disable if you do not have the organization_ugc_post table
-    linkedin_pages_share_statistic_enabled: false #Disable if you are not using the share statistic table
-    linkedin_pages_ugc_post_history_enabled: false #Disable if you are not using the ugc post history table
-    linkedin_pages_ugc_post_share_content_media_enabled: false #Disable if you are not using the ugc post share content media table
-    linkedin_pages_ugc_post_share_statistic: false #Disable if you are not using the ugc post share statistic table
 ```
 
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
