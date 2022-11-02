@@ -10,19 +10,33 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# LinkedIn Pages (Source) ([Docs](https://fivetran.github.io/dbt_linkedin_pages_source/))
-This package models LinkedIn Pages data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-company-pages). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-company-pages#schemainformation).
+# Linkedin Pages Source dbt Package ([Docs](https://fivetran.github.io/dbt_linkedin_pages_source/))
 
-## Models
-This package contains staging models, designed to work simultaneously with our [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages) and our [Social Media Reporting package](https://github.com/fivetran/dbt_social_media_reporting). The staging models name columns consistently across all packages:
- * Boolean fields are prefixed with `is_` or `has_`
- * Timestamps are appended with `_timestamp`
- * ID primary keys are prefixed with the name of the table. For example, the organization table's ID column is renamed `organization_id`.
+# 📣 What does this dbt package do?
+- Materializes [LinkedIn Pages staging tables](https://fivetran.github.io/dbt_linkedin_pages_source/#!/overview/linkedin_pages_source/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-company-pages#schemainformation). These staging tables clean, test, and prepare your LinkedIn Pages data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-company-pages) for analysis by doing the following:
+  - Name columns for consistency across all packages and for easier analysis
+  - Adds freshness tests to source data
+  - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
+- Generates a comprehensive data dictionary of your LinkedIn Pages data through the [dbt docs site](https://fivetran.github.io/dbt_linkedin_pages_source/).
+- These tables are designed to work simultaneously with our [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages) and our [Social Media Reporting package](https://github.com/fivetran/dbt_social_media_reporting).
 
-## Installation Instructions
-Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions, or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+# 🎯 How do I use the dbt package?
+## Step 1: Prerequisites
+To use this dbt package, you must have the following:
+- A Fivetran LinkedIn Pages connector syncing data into your destination. 
+- A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
-Include in your `packages.yml`
+### Databricks Dispatch Configuration
+If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
+```yml
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
+```
+
+## Step 2: Install the package
+Include the following linkedin_pages_source package version in your `packages.yml` file **only if you are NOT also installing the [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages_source)**. The transform package has a dependency on this source package.
+> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 ```yaml
 packages:
@@ -30,21 +44,27 @@ packages:
     version: [">=0.2.0", "<0.3.0"]
 ```
 
-## Package Maintenance
-The Fivetran team maintaining this package **only** maintains the latest version. We recommend you keep your `packages.yml` updated with the [dbt hub latest version](https://hub.getdbt.com/fivetran/linkedin_pages_source/latest/). You may refer to the [CHANGELOG](https://github.com/fivetran/dbt_linkedin_pages_source/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
-
-## Configuration
+## Step 3: Define database and schema variables
 By default, this package will look for your LinkedIn Pages data in the `linkedin_pages` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your LinkedIn Pages data is, please add the following configuration to your `dbt_project.yml` file:
+
+```yml 
+vars:
+    linkedin_pages_schema: your_schema_name
+    linkedin_pages_database: your_database_name 
+```
+
+## (Optional) Step 4: Additional Configurations
+### Changing the Build Schema
+
+By default, this package will build the LinkedIn Pages staging models within a schema titled (`<target_schema>` + `_stg_linkedin_pages`) in your target database. If this is not where you would like your LinkedIn Pages staging data to be written to, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml
 
 ...
-config-version: 2
-
-vars:
-    linkedin_pages_schema: your_schema_name
-    linkedin_pages_database: your_database_name 
+models:
+    linkedin_pages_source:
+      +schema: my_new_schema_name # leave blank for just the target_schema
 ```
 
 ### Unioning Multiple LinkedIn Pages Connectors
@@ -61,18 +81,21 @@ vars:
     ##OR you may set EITHER the databases variables below
     linkedin_pages_union_databases: ['linkedin_pages_one','linkedin_pages_two']
 ```
-### Changing the Build Schema
 
-By default, this package will build the LinkedIn Pages staging models within a schema titled (`<target_schema>` + `_stg_linkedin_pages`) in your target database. If this is not where you would like your LinkedIn Pages staging data to be written to, add the following configuration to your `dbt_project.yml` file:
-
+### Disable models for non-existent sources
+This package takes into consideration that not every LinkedIn Page account utilizes these features, and allows you to disable the corresponding functionality. By default, all variables' values are assumed to be `true`. 
 ```yml
-# dbt_project.yml
-
-...
-models:
-    linkedin_pages_source:
-      +schema: my_new_schema_name # leave blank for just the target_schema
+vars:
+    linkedin_pages_organization_enabled: false  #Disable if you do not have the organization table
+    linkedin_pages_organization_ugc_post_enabled: false #Disable if you do not have the organization_ugc_post table
+    linkedin_pages_share_statistic_enabled: false #Disable if you are not using the share statistic table
+    linkedin_pages_ugc_post_history_enabled: false #Disable if you are not using the ugc post history table
+    linkedin_pages_ugc_post_share_content_media_enabled: false #Disable if you are not using the ugc post share content media table
+    linkedin_pages_ugc_post_share_statistic: false #Disable if you are not using the ugc post share statistic table
 ```
+
+## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+Fivetran offers the ability for you to orchestrate your dbt project through the [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt) product. Refer to the linked docs for more information on how to setup your project for orchestration through Fivetran. 
 
 # 🔍 Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
@@ -86,34 +109,16 @@ packages:
       version: [">=1.0.0", "<2.0.0"]
 ```
 
+# 🙌 How is this package maintained and can I contribute?
+## Package Maintenance
+The Fivetran team maintaining this package **only** maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/linkedin_pages_source/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_linkedin_pages_source/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+
 ## Contributions
+These dbt packages are developed by a small team of analytics engineers at Fivetran. However, the packages are made better by community contributions! 
 
-Don't see a model or specific metric you would like to be included? Notice any bugs when installing and running the package? If so, we highly encourage and welcome contributions to this package! 
-Please create issues or open PRs against `main`. See [the Discourse post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) for information on how to contribute to a package.
+We highly encourage and welcome contributions to this package. Check out [this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package!
 
-## Database Support
-
-This package has been tested on BigQuery, Snowflake, Redshift, Postgres, and Databricks.
-
-### Databricks Dispatch Configuration
-dbt `v0.20.0` introduced a new project-level dispatch configuration that enables an "override" setting for all dispatched macros. If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
-```yml
-# dbt_project.yml
-
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['spark_utils', 'dbt_utils']
-```
-
-## Resources:
-- Provide [feedback](https://www.surveymonkey.com/r/DQ7K7WW) on our existing dbt packages or what you'd like to see next
-- Have questions or feedback, or need help? Book a time during our office hours [here](https://calendly.com/fivetran-solutions-team/fivetran-solutions-team-office-hours) or email us at solutions@fivetran.com.
-- Find all of Fivetran's pre-built dbt packages in our [dbt hub](https://hub.getdbt.com/fivetran/)
-- Learn how to orchestrate your models with [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt)
-- Learn more about Fivetran overall [in our docs](https://fivetran.com/docs)
-- Check out [Fivetran's blog](https://fivetran.com/blog)
-- Learn more about dbt [in the dbt docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the dbt blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+# 🏪 Are there any resources available?
+- If you encounter any questions or want to reach out for help, please refer to the [GitHub Issue](https://github.com/fivetran/dbt_linkedin_pages_source/issues/new/choose) section to find the right avenue of support for you.
+- If you would like to provide feedback to the dbt package team at Fivetran, or would like to request a future dbt package to be developed, then feel free to fill out our [Feedback Form](https://www.surveymonkey.com/r/DQ7K7WW).
+- Have questions or want to just say hi? Book a time during our office hours [here](https://calendly.com/fivetran-solutions-team/fivetran-solutions-team-office-hours) or send us an email at solutions@fivetran.com.
