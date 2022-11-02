@@ -52,10 +52,7 @@ vars:
 
 By default, this package will build the LinkedIn Pages staging models within a schema titled (`<target_schema>` + `_stg_linkedin_pages`) in your target database. If this is not where you would like your LinkedIn Pages staging data to be written to, add the following configuration to your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-
-...
+```yml 
 models:
     linkedin_pages_source:
       +schema: my_new_schema_name # leave blank for just the target_schema
@@ -97,9 +94,7 @@ dispatch:
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for details</summary>
 <br>
-
 Fivetran offers the ability for you to orchestrate your dbt project through the [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt) product. Refer to the linked docs for more information on how to setup your project for orchestration through Fivetran. 
-
 </details>
 
 # 🔍 Does this package have dependencies?
