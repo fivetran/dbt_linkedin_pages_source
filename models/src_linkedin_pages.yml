@@ -8,7 +8,8 @@ sources:
     loaded_at_field: _fivetran_synced
     tables:
       - name: share_statistic
-        description: Each record represnts the performance of a Linkedin share.
+        identifier: "{{ var('linkedin_pages_share_statistic_identifier', 'share_statistic')}}"
+        description: Each record represents the performance of a Linkedin share.
         columns:
           - name: _fivetran_id
             description: The Fivetran ID of the record
@@ -32,6 +33,7 @@ sources:
             description: Number of shares.
 
       - name: ugc_post_share_statistic
+        identifier: "{{ var('linkedin_pages_ugc_post_share_statistic_identifier', 'ugc_post_share_statistic')}}"
         description: Mapping table between UGC posts and share statistics
         columns:
           - name: _fivetran_synced
@@ -42,6 +44,7 @@ sources:
             description: The ID of the UGC post record.
 
       - name: ugc_post_history
+        identifier: "{{ var('linkedin_pages_ugc_post_history_identifier', 'ugc_post_history')}}"
         description: Each record represents a version of a UGC post.
         columns:
           - name: _fivetran_synced
@@ -100,6 +103,7 @@ sources:
             description: Visibility restrictions on content. 
       
       - name: ugc_post_share_content_media
+        identifier: "{{ var('linkedin_pages_ugc_post_share_content_media_identifier', 'ugc_post_share_content_media')}}"
         description: Each record represents content media shared as part of a UGC post.
         columns:
           - name: _fivetran_synced
@@ -134,6 +138,7 @@ sources:
             description: The ID of the UGC post record.
 
       - name: organization
+        identifier: "{{ var('linkedin_pages_organization_identifier', 'organization')}}"
         description: Each record represents an organization.
         columns:
           - name: _fivetran_synced
@@ -238,6 +243,7 @@ sources:
             description: The preferred language of the organization.
 
       - name: organization_ugc_post
+        identifier: "{{ var('linkedin_pages_organization_ugc_post_identifier', 'organization_ugc_post')}}"
         description: Mapping table for organizations and UGC posts.
         columns:
           - name: _fivetran_synced
