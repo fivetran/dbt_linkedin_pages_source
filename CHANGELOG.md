@@ -1,3 +1,9 @@
+# dbt_linkedin_pages_source v0.UPDATE.UPDATE
+
+ ## Under the Hood:
+
+- Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
+- Updated the pull request [templates](/.github).
 # dbt_linkedin_pages_source v0.2.0
 ## 🚨 Breaking Changes 🚨:
 [PR #10](https://github.com/fivetran/dbt_linkedin_pages_source/pull/10) includes the following breaking changes:

@@ -33,8 +33,8 @@ dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
 ```
-## Step 2: Install the package
-Include the following linkedin_pages_source package version in your `packages.yml` file **only if you are NOT also installing the [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages_source)**. The transform package has a dependency on this source package.
+## Step 2: Install the package (skip if also using the `Linkedin Pages` transformation package)
+If you  are **not** using the [Linkedin Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages), include the following package version in your `packages.yml` file. If you are installing the transform package, the source package is automatically installed as a dependency.
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 ```yaml
