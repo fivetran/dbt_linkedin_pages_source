@@ -123,48 +123,6 @@ models:
       - name: source_relation
         description: The source of the record, if the unioning functionality is being used.
 
-  - name: stg_linkedin_pages__ugc_post_share_content_media
-    description: Each record represents content media shared as part of a UGC post.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ugc_post_id
-            - last_modified_timestamp
-            - source_relation
-    columns:
-      - name: _fivetran_synced
-        description: The timestamp of when the record was last synced by Fivetran
-      - name: description_attributes
-        description: User generated attributes in the text.
-      - name: description_inferred_locale
-        description: The locale that may have be inferred for this text.
-      - name: description_text
-        description: The text content that may be attributed.
-      - name: landing_page_title
-        description: If present, this content entity will be rendered as a CTA with landingPageTitle as the CTA text and landingPageUrl as the click through url.
-      - name: landing_page_url
-        description: The click through url. Maximum length is 2000 characters.
-      - name: last_modified_timestamp
-        description: The timestamp when the content was last modified.
-      - name: media
-        description: The URN of the media shared.
-      - name: original_url
-        description: URL whose content is summarized
-      - name: status
-        description: The status of the availability of this media. 
-      - name: thumbnails
-        description: The thumbnail saved from the ingestion of this article.
-      - name: title_attributes
-        description: User generated attributes in the text.
-      - name: title_inferred_locale
-        description: The locale that may have be inferred for this text.
-      - name: title_text
-        description: The text content that may be attributed.
-      - name: ugc_post_id
-        description: The ID of the UGC post record.
-      - name: source_relation
-        description: The source of the record, if the unioning functionality is being used.
-
   - name: stg_linkedin_pages__ugc_post_share_statistic 
     description: Mapping table for organizations and UGC posts.
     tests:
