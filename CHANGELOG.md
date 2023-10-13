@@ -4,7 +4,7 @@
 - Deprecated source table `ugc_post_share_content_media` and its use in downstream models since it was deprecated in the Fivetran connector. 
 
 [PR #12](https://github.com/fivetran/dbt_linkedin_pages_source/pull/12) includes the following updates:
- ## Under the Hood:
+## Under the Hood:
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
 
