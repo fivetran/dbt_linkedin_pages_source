@@ -137,3 +137,5 @@ models:
         description: Unique id for the organization
       - name: ugc_post_id
         description: Unique id for the UGC post
+      - name: source_relation
+        description: The source of the record, if the unioning functionality is being used.
