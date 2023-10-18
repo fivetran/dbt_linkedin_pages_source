@@ -27,12 +27,14 @@ fields as (
 final as (
     
     select 
+        source_relation,
         _fivetran_synced,
         author as post_author,
+        commentary,
         created_actor,
         created_time as created_timestamp,
-        deleted_actor,
-        deleted_time as deleted_timestamp,
+        --deleted_actor,
+        --deleted_time as deleted_timestamp,
         first_published_at as first_published_timestamp,
         case when lower(id) like '%urn:li:share:%' 
                 then replace(id, 'urn:li:share:', '')
@@ -45,15 +47,23 @@ final as (
         last_modified_actor,
         last_modified_time as last_modified_timestamp,
         lifecycle_state,
-        specific_content_primary_landing_page_url,
-        specific_content_share_commentary_attributes,
-        specific_content_share_commentary_inferred_locale,
-        specific_content_share_commentary_text,
-        specific_content_share_media_category,
-        target_audience_targeted_entities,
-        version_tag,
+        --specific_content_primary_landing_page_url,
+        --specific_content_share_commentary_attributes,
+        --specific_content_share_commentary_inferred_locale,
+        --specific_content_share_commentary_text,
+        --specific_content_share_media_category,
+        --target_audience_targeted_entities,
+        --version_tag,
         visibility,
-        source_relation
+
+        -- new columns, separated for now while working on updates
+        commentary,
+        --container_entity,
+        --distribution_external_distribution_channels,
+        --distribution_feed_distribution,
+        --response_context_parent,
+        --response_context_root,
+
     from fields
 )
 

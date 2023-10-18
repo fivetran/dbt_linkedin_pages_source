@@ -6,6 +6,7 @@ vars:
   share_statistic: "{{ source('linkedin_pages','share_statistic') }}"
   ugc_post_share_statistic: "{{ source('linkedin_pages','ugc_post_share_statistic') }}"
   ugc_post_history: "{{ source('linkedin_pages','ugc_post_history') }}"
+  post_content: "{{ source('linkedin_pages','post_content') }}"
   organization: "{{ source('linkedin_pages','organization') }}"
   organization_ugc_post: "{{ source('linkedin_pages','organization_ugc_post') }}"
 models:
