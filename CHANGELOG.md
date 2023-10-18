@@ -1,7 +1,10 @@
 # dbt_linkedin_pages_source v0.3.0
 [PR #14](https://github.com/fivetran/dbt_linkedin_pages_source/pull/14) includes the following breaking changes:
 ## 🚨 Breaking Changes 🚨:
-- Removed source table `ugc_post_share_content_media` and its use in downstream models since this was deprecated in the Fivetran connector. 
+- This update is made breaking due to the following changes in the [Linkedin Company Pages Fivetran Connector](https://fivetran.com/docs/applications/linkedin-company-pages). 
+    - Deprecated source table `ugc_post_share_content_media`
+    - Added source table `post_content` 
+    - See the [May 2023 release notes](https://fivetran.com/docs/applications/linkedin-company-pages/changelog#may2023) for full details.
 - Removed the following deprecated columns from `stg_linkedin_pages__ugc_post_history`:
     - deleted_actor
     - deleted_timestamp
