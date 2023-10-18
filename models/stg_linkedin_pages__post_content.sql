@@ -30,12 +30,6 @@ final as (
         _fivetran_id,
         _fivetran_synced,
         post_id as ugc_post_urn,
-        cast(case when lower(post_id) like '%urn:li:share:%' 
-                then replace(post_id, 'urn:li:share:', '')
-            when lower(post_id) like '%urn:li:ugcpost:%'
-                then replace(lower(post_id), 'urn:li:ugcpost:', '')
-            else post_id end
-            as {{ dbt.type_string() }}) as ugc_post_id,
         article_description,
         article_source,
         article_thumbnail,

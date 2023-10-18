@@ -131,7 +131,7 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - post_id
+            - ugc_post_urn
             - _fivetran_id
             - source_relation
     columns:
@@ -139,8 +139,8 @@ models:
         description: The timestamp of when the record was last synced by Fivetran
       - name: _fivetran_id
         description: The Fivetran ID of the record
-      - name: post_id
-        description: The ID of the post record.
+      - name: ugc_post_urn
+        description: The URN of the post record.
       - name: article_description
         description: Custom or saved description of the article. If empty, there is none. 
       - name: article_source
