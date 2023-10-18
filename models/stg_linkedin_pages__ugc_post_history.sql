@@ -33,11 +33,12 @@ final as (
         created_actor,
         created_time as created_timestamp,
         first_published_at as first_published_timestamp,
-        case when lower(id) like '%urn:li:share:%' 
+        cast(case when lower(id) like '%urn:li:share:%' 
                 then replace(id, 'urn:li:share:', '')
             when lower(id) like '%urn:li:ugcpost:%'
                 then replace(lower(id), 'urn:li:ugcpost:', '')
-            else id end as ugc_post_id,
+            else id end
+            as {{ dbt.type_string() }}) as ugc_post_id,
         id as ugc_post_urn,
         -- This generates an 'embed' URL. I can't get normal URLs working.
         {{ dbt.concat(["'https://www.linkedin.com/embed/feed/update/'", "id"]) }} as post_url,

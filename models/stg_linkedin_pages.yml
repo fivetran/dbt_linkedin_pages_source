@@ -132,7 +132,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - post_id
-            - fivetran_id
+            - _fivetran_id
             - source_relation
     columns:
       - name: _fivetran_synced
