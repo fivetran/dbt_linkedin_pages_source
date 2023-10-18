@@ -32,7 +32,7 @@ final as (
         post_id as ugc_post_urn,
         cast(case when lower(post_id) like '%urn:li:share:%' 
                 then replace(post_id, 'urn:li:share:', '')
-            when lower(id) like '%urn:li:ugcpost:%'
+            when lower(post_id) like '%urn:li:ugcpost:%'
                 then replace(lower(post_id), 'urn:li:ugcpost:', '')
             else id end
             as {{ dbt.type_string() }}) as ugc_post_id,
