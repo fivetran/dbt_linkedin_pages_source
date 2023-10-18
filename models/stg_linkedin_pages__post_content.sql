@@ -2,7 +2,7 @@
 with base as (
 
     select * 
-    from {{ ref('stg_linkedin_pages__post_content') }}
+    from {{ ref('stg_linkedin_pages__post_content_tmp') }}
 
 ),
 
@@ -27,8 +27,8 @@ fields as (
 final as (
     
     select 
-        source_relation,
         _fivetran_id,
+        _fivetran_synced,
         post_id,
         article_description,
         article_source,
@@ -45,8 +45,8 @@ final as (
         poll_settings_is_voter_visible_to_author,
         poll_settings_vote_selection_type,
         poll_unique_voters_count,
-        type as post_type
-
+        type as post_type,
+        source_relation
     from fields
 )
 

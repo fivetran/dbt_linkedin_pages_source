@@ -51,21 +51,14 @@ sources:
             description: The timestamp of when the record was last synced by Fivetran
           - name: author
             description: Urn of the author of this content.
-          - name: client_application
-            description: Urn of the client application that created this content.
           - name: commentary
             description: The text content of the post. 
           - name: container_entity
             description: Urn of container entity that contains the user generated content such as a Group or a Story.
-          - name: content_certification_record
-            description: he content certification record associated with this content. Used to maintain information about the content's visibility and spam status.
           - name: created_actor
             description: User who created the content.
           - name: created_time
             description: Timestamp when the content was created.
-            description: Timestamp when the content was deleted.
-          - name: distribution_distributed_via_follow_feed
-            description: Indicates whether the content was distributed via the follow feed.
           - name: distribution_external_distribution_channels
             description: List of external distribution channels that the content was distributed to.
           - name: distribution_feed_distribution
@@ -76,6 +69,8 @@ sources:
             description: Unique id for this object.
           - name: last_modified_actor
             description: User who last modified the content.
+          - name: last_modified_time
+            description: Timestamp when the content was last modified.
           - name: lifecycle_state
             description: The current state of the content.
           - name: response_context_parent

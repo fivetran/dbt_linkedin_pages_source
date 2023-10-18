@@ -94,8 +94,12 @@ models:
         description: The time at which this content was first published.
       - name: ugc_post_id
         description: Unique id for this object.
+      - name: ugc_post_urn
+        description: URN of the post.
       - name: last_modified_actor
         description: User who last modified the content.
+      - name: last_modified_timestamp
+        description: Timestamp when the content was last modified.
       - name: post_url
         description: Url of the post.
       - name: lifecycle_state
@@ -169,3 +173,5 @@ models:
         description: Number of unique voters on the poll. Defaults to 0.
       - name: post_type
         description: The type of the post.
+      - name: source_relation
+        description: The source of the record, if the unioning functionality is being used.

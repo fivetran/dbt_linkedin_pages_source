@@ -1,4 +1,4 @@
-{% macro get_ugc_post_history_columns() %}
+{% macro get_post_content_columns() %}
 
 {% set columns = [
     {"name": "_fivetran_synced", "datatype": dbt.type_timestamp()},
