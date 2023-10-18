@@ -34,7 +34,7 @@ final as (
                 then replace(post_id, 'urn:li:share:', '')
             when lower(post_id) like '%urn:li:ugcpost:%'
                 then replace(lower(post_id), 'urn:li:ugcpost:', '')
-            else id end
+            else post_id end
             as {{ dbt.type_string() }}) as ugc_post_id,
         article_description,
         article_source,
