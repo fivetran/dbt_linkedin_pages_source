@@ -1,11 +1,11 @@
 {{
     fivetran_utils.union_data(
-        table_identifier='ugc_post_share_content_media', 
+        table_identifier='post_content', 
         database_variable='linkedin_pages_database', 
         schema_variable='linkedin_pages_schema', 
         default_database=target.database,
         default_schema='linkedin_company_pages',
-        default_variable='ugc_post_share_content_media',
+        default_variable='post_content',
         union_schema_variable='linkedin_pages_union_schemas',
         union_database_variable='linkedin_pages_union_databases'
     )

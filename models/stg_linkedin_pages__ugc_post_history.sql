@@ -29,31 +29,25 @@ final as (
     select 
         _fivetran_synced,
         author as post_author,
+        commentary,
         created_actor,
         created_time as created_timestamp,
-        deleted_actor,
-        deleted_time as deleted_timestamp,
         first_published_at as first_published_timestamp,
-        case when lower(id) like '%urn:li:share:%' 
+        cast(case when lower(id) like '%urn:li:share:%' 
                 then replace(id, 'urn:li:share:', '')
             when lower(id) like '%urn:li:ugcpost:%'
                 then replace(lower(id), 'urn:li:ugcpost:', '')
-            else id end as ugc_post_id,
+            else id end
+            as {{ dbt.type_string() }}) as ugc_post_id,
         id as ugc_post_urn,
         -- This generates an 'embed' URL. I can't get normal URLs working.
         {{ dbt.concat(["'https://www.linkedin.com/embed/feed/update/'", "id"]) }} as post_url,
         last_modified_actor,
         last_modified_time as last_modified_timestamp,
         lifecycle_state,
-        specific_content_primary_landing_page_url,
-        specific_content_share_commentary_attributes,
-        specific_content_share_commentary_inferred_locale,
-        specific_content_share_commentary_text,
-        specific_content_share_media_category,
-        target_audience_targeted_entities,
-        version_tag,
         visibility,
         source_relation
+
     from fields
 )
 

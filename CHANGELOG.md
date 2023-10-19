@@ -1,9 +1,34 @@
-# dbt_linkedin_pages_source v0.UPDATE.UPDATE
+# dbt_linkedin_pages_source v0.3.0
+[PR #14](https://github.com/fivetran/dbt_linkedin_pages_source/pull/14) includes the following breaking changes:
+## 🚨 Breaking Changes 🚨:
+- This update is made breaking due to the following changes in the [Linkedin Company Pages Fivetran Connector](https://fivetran.com/docs/applications/linkedin-company-pages). 
+    - Deprecated source table `ugc_post_share_content_media`
+    - Added source table `post_content` 
+    - See the [May 2023 release notes](https://fivetran.com/docs/applications/linkedin-company-pages/changelog#may2023) for full details.
+- Removed the following deprecated columns from `stg_linkedin_pages__ugc_post_history`:
+    - deleted_actor
+    - deleted_timestamp
+    - specific_content_primary_landing_page_url
+    - specific_content_share_commentary_attributes
+    - specific_content_share_commentary_inferred_locale
+    - specific_content_share_commentary_text
+    - specific_content_share_media_category
+    - target_audience_targeted_entities
+    - version_tag
 
- ## Under the Hood:
+## Features:
+- Added the following new column to `stg_linkedin_pages__ugc_post_history`:
+    - commentary
+- Added source table `post_content` and staging table `stg_linkedin_pages__post_content`
+- Updated documentation with the updated columns
 
+## Under the Hood:
+- Updated seeds to reflect the above changes. 
+
+[PR #12](https://github.com/fivetran/dbt_linkedin_pages_source/pull/12) includes the following updates:
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
+
 # dbt_linkedin_pages_source v0.2.0
 ## 🚨 Breaking Changes 🚨:
 [PR #10](https://github.com/fivetran/dbt_linkedin_pages_source/pull/10) includes the following breaking changes:

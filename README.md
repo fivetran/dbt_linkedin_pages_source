@@ -40,7 +40,7 @@ If you  are **not** using the [Linkedin Pages transformation package](https://gi
 ```yaml
 packages:
   - package: fivetran/linkedin_pages_source
-    version: [">=0.2.0", "<0.3.0"]
+    version: [">=0.3.0", "<0.4.0"]
 ```
 
 ## Step 3: Define database and schema variables

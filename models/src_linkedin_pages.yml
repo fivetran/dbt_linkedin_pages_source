@@ -51,22 +51,14 @@ sources:
             description: The timestamp of when the record was last synced by Fivetran
           - name: author
             description: Urn of the author of this content.
-          - name: client_application
-            description: Urn of the client application that created this content.
+          - name: commentary
+            description: The text content of the post. 
           - name: container_entity
             description: Urn of container entity that contains the user generated content such as a Group or a Story.
-          - name: content_certification_record
-            description: he content certification record associated with this content. Used to maintain information about the content's visibility and spam status.
           - name: created_actor
             description: User who created the content.
           - name: created_time
             description: Timestamp when the content was created.
-          - name: deleted_actor
-            description: User who deleted the content.
-          - name: deleted_time
-            description: Timestamp when the content was deleted.
-          - name: distribution_distributed_via_follow_feed
-            description: Indicates whether the content was distributed via the follow feed.
           - name: distribution_external_distribution_channels
             description: List of external distribution channels that the content was distributed to.
           - name: distribution_feed_distribution
@@ -85,57 +77,8 @@ sources:
             description: The content that a piece of content is a response to. 
           - name: response_context_root
             description: The greatest ancestor content that a piece of content is a response to. 
-          - name: specific_content_primary_landing_page_url
-            description: The main landing page URL of the share.
-          - name: specific_content_share_commentary_attributes
-            description: User generated attributes in the text.
-          - name: specific_content_share_commentary_inferred_locale
-            description: The locale that may have be inferred for this text.
-          - name: specific_content_share_commentary_text
-            description: The text content that may be attributed. 
-          - name: specific_content_share_media_category
-            description: The type of media contained within the media field of this object.
-          - name: target_audience_targeted_entities
-            description: Intended audience or best fit audiences for this content as decided by the owner.
-          - name: version_tag
-            description: Version tag of the entity.
           - name: visibility
             description: Visibility restrictions on content. 
-      
-      - name: ugc_post_share_content_media
-        identifier: "{{ var('linkedin_pages_ugc_post_share_content_media_identifier', 'ugc_post_share_content_media')}}"
-        description: Each record represents content media shared as part of a UGC post.
-        columns:
-          - name: _fivetran_synced
-            description: The timestamp of when the record was last synced by Fivetran
-          - name: description_attributes
-            description: User generated attributes in the text.
-          - name: description_inferred_locale
-            description: The locale that may have be inferred for this text.
-          - name: description_text
-            description: The text content that may be attributed.
-          - name: landing_page_title
-            description: If present, this content entity will be rendered as a CTA with landingPageTitle as the CTA text and landingPageUrl as the click through url.
-          - name: landing_page_url
-            description: The click through url. Maximum length is 2000 characters.
-          - name: last_modified_time
-            description: The timestamp when the content was last modified.
-          - name: media
-            description: The URN of the media shared.
-          - name: original_url
-            description: URL whose content is summarized
-          - name: status
-            description: The status of the availability of this media. 
-          - name: thumbnails
-            description: The thumbnail saved from the ingestion of this article.
-          - name: title_attributes
-            description: User generated attributes in the text.
-          - name: title_inferred_locale
-            description: The locale that may have be inferred for this text.
-          - name: title_text
-            description: The text content that may be attributed.
-          - name: ugc_post_id
-            description: The ID of the UGC post record.
 
       - name: organization
         identifier: "{{ var('linkedin_pages_organization_identifier', 'organization')}}"
@@ -252,3 +195,46 @@ sources:
             description: Unique id for the organization
           - name: ugc_post_id
             description: Unique id for the UGC post
+
+      - name: post_content
+        identifier: "{{ var('linkedin_pages_post_content_identifier', 'post_content')}}"
+        description: Content of posts.
+        columns:
+          - name: _fivetran_synced
+            description: The timestamp of when the record was last synced by Fivetran
+          - name: _fivetran_id
+            description: The Fivetran ID of the record
+          - name: post_id
+            description: The ID of the post record.
+          - name: article_description
+            description: Custom or saved description of the article. If empty, there is none. 
+          - name: article_source
+            description: A URL of the article. Typically the URL that was ingested to maintain URL parameters. 
+          - name: article_thumbnail
+            description: 	Custom or saved thumbnail for the article. If empty, there is none. 
+          - name: article_thumbnail_alt_text
+            description: Alt text for the custom thumbnail. If empty, there is none. 
+          - name: article_title
+            description: Custom or saved title of the article. 
+          - name: carousel_id
+            description: The URN of the carousel content.
+          - name: media_alt_text
+            description: The alternative text for the media. None if empty. 
+          - name: media_id
+            description: 	The id of the media.
+          - name: media_title
+            description: The title for media. None if empty. 
+          - name: multi_image_alt_text
+            description: The alternate text of this thumbnail. Used for screen reader accessibility.
+          - name: poll_question
+            description: Question for the poll. Max length of 140 characters.
+          - name: poll_settings_duration
+            description: Duration of poll being open for votes. 
+          - name: poll_settings_is_voter_visible_to_author
+            description: Poll author’s visibility to voters. Defaults to true.
+          - name: poll_settings_vote_selection_type
+            description: The selection type of votes on the poll. Defaults to SINGLE_VOTE.
+          - name: poll_unique_voters_count
+            description: Number of unique voters on the poll. Defaults to 0.
+          - name: type
+            description: The type of the post.
