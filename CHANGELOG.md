@@ -6,21 +6,21 @@
     - Added source table `post_content` 
     - See the [May 2023 release notes](https://fivetran.com/docs/applications/linkedin-company-pages/changelog#may2023) for full details.
 - Removed the following deprecated columns from `stg_linkedin_pages__ugc_post_history`:
-    - deleted_actor
-    - deleted_timestamp
-    - specific_content_primary_landing_page_url
-    - specific_content_share_commentary_attributes
-    - specific_content_share_commentary_inferred_locale
-    - specific_content_share_commentary_text
-    - specific_content_share_media_category
-    - target_audience_targeted_entities
-    - version_tag
+    - `deleted_actor`
+    - `deleted_timestamp`
+    - `specific_content_primary_landing_page_url`
+    - `specific_content_share_commentary_attributes`
+    - `specific_content_share_commentary_inferred_locale`
+    - `specific_content_share_commentary_text`
+    - `specific_content_share_media_category`
+    - `target_audience_targeted_entities`
+    - `version_tag`
 
 ## Features:
 - Added the following new column to `stg_linkedin_pages__ugc_post_history`:
-    - commentary
+    - `commentary`
 - Added source table `post_content` and staging table `stg_linkedin_pages__post_content`
-- Updated documentation with the updated columns
+- Updated documentation with the updated columns.
 
 ## Under the Hood:
 - Updated seeds to reflect the above changes. 
