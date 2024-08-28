@@ -14,9 +14,9 @@
 
 ## What does this dbt package do?
 - Materializes [LinkedIn Pages staging tables](https://fivetran.github.io/dbt_linkedin_pages_source/#!/overview/linkedin_pages_source/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-company-pages#schemainformation). These staging tables clean, test, and prepare your LinkedIn Pages data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-company-pages) for analysis by doing the following:
-- Name columns for consistency across all packages and for easier analysis
-- Adds freshness tests to source data
-- Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
+  - Name columns for consistency across all packages and for easier analysis
+  - Adds freshness tests to source data
+  - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
 - Generates a comprehensive data dictionary of your LinkedIn Pages data through the [dbt docs site](https://fivetran.github.io/dbt_linkedin_pages_source/).
 - These tables are designed to work simultaneously with our [LinkedIn Pages transformation package](https://github.com/fivetran/dbt_linkedin_pages) and our [Social Media Reporting package](https://github.com/fivetran/dbt_social_media_reporting).
 
