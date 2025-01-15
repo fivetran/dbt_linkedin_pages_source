@@ -1,3 +1,8 @@
+# dbt_linkedin_pages_source version.version
+
+## Documentation
+- Corrected references to connectors and connections in the README. ([#19](https://github.com/fivetran/dbt_linkedin_pages_source/pull/19))
+
 # dbt_linkedin_pages_source v0.3.0
 [PR #14](https://github.com/fivetran/dbt_linkedin_pages_source/pull/14) includes the following breaking changes:
 ## 🚨 Breaking Changes 🚨:

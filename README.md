@@ -1,4 +1,6 @@
-<p align="center">
+# Linkedin Pages Source dbt Package ([Docs](https://fivetran.github.io/dbt_linkedin_pages_source/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_linkedin_pages_source/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -9,8 +11,6 @@
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
-
-# Linkedin Pages Source dbt Package ([Docs](https://fivetran.github.io/dbt_linkedin_pages_source/))
 
 ## What does this dbt package do?
 - Materializes [LinkedIn Pages staging tables](https://fivetran.github.io/dbt_linkedin_pages_source/#!/overview/linkedin_pages_source/models/?g_v=1) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-company-pages#schemainformation). These staging tables clean, test, and prepare your LinkedIn Pages data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-company-pages) for analysis by doing the following:
@@ -23,7 +23,7 @@
 ## How do I use the dbt package?
 ### Step 1: Prerequisites
 To use this dbt package, you must have the following:
-- A Fivetran LinkedIn Pages connector syncing data into your destination.
+- A Fivetran LinkedIn Pages connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
 #### Databricks Additional Configuration
@@ -74,8 +74,8 @@ vars:
     linkedin_pages_<default_source_table_name>_identifier: your_table_name 
 ```
 
-#### Unioning Multiple LinkedIn Pages Connectors
-If you have multiple LinkedIn Pages connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table(s) into the final models. You will be able to see which source it came from in the `source_relation` column(s) of each model. To use this functionality, you will need to set either (**note that you cannot use both**) the `union_schemas` or `union_databases` variables:
+#### Unioning Multiple LinkedIn Pages Connections
+If you have multiple LinkedIn Pages connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table(s) into the final models. You will be able to see which source it came from in the `source_relation` column(s) of each model. To use this functionality, you will need to set either (**note that you cannot use both**) the `union_schemas` or `union_databases` variables:
 
 ```yml
 # dbt_project.yml
