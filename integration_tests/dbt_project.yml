@@ -14,7 +14,13 @@ vars:
     linkedin_pages_schema: linkedin_pgs_source_integrations_tests_2
 
 seeds:
+  +docs:
+    show: False
   linkedin_pages_source_integration_tests:
     linkedin_pages_ugc_post_share_statistic_data:
       +column_types:
         ugc_post_id: "{%- if target.type == 'bigquery' -%} INT64 {%- else -%} bigint {%- endif -%}"
+
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True
